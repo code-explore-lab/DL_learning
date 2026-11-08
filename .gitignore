@@ -1,0 +1,68 @@
+# ---- 文档 ----
+*.md
+# 如需把 README 一起忽略，删掉下面这一行
+!README.md
+*.pdf
+*.docx
+
+# ---- IDE / 编辑器 ----
+.idea/
+.vscode/
+*.iml
+*.swp
+*~
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- 深度学习产物 ----
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.engine
+*.plan
+*.trt
+data/
+datasets/
+outputs/
+runs/
+wandb/
+lightning_logs/
+*.log
+
+# ---- 编译产物 ----
+*.o
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.ilk
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,642 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>cuda-40-tasks</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+/* =========================
+   A4 Print
+   ========================= */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 17mm 15mm 17mm;
+  }
+  .pagebreak {
+    page-break-after: always;
+    height: 0;
+    visibility: hidden;
+  }
+  h1,  h3, h4 {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+  table, pre, blockquote {
+    page-break-inside: avoid;
+  }
+  
+  /* PDF打印模式：链接黑色加粗、无下划线，保留超链接 */
+  a {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: #222222 !important;
+    font-weight:700 !important;
+    text-decoration: none !important;
+  }
+  a[href^="http"] {
+    pointer-events: auto !important;
+  }
+}
+
+/* =========================
+   Global
+   ========================= */
+body {
+  color: #222222;
+  font-family: "Noto Sans", "Microsoft YaHei", sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+/* =========================
+   Headings
+   ========================= */
+h1 {
+  color: #111827;
+  font-size: 20pt;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+h2 {
+  color: #2563EB;          /* 项目名标题保持蓝色 */
+  font-size: 13.5pt;
+  font-weight: 700;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #D1D5DB;
+} 
+h3 {
+  color: #2563EB;
+  font-size: 11.5pt;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+/* =========================
+   Text
+   ========================= */
+strong {
+  color: #374151;
+  font-weight: 700;
+}
+p {
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+/* =========================
+   Lists
+   ========================= */
+ul {
+  margin-top: 3px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 3px;
+}
+/* =========================
+   Links
+   ========================= */
+a {
+  color: #222222; /* 预览界面链接：黑色加粗 */
+  font-weight:700;
+  text-decoration: none;
+}
+h2.project-title {
+  color: #2563EB;
+}
+/* =========================
+   Inline Code
+   ========================= */
+code {
+  color: #374151;
+  background: #F3F4F6;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = ''><h1><a name="cuda-入门-40-task-路线图" class="md-header-anchor"></a><span>CUDA 入门 40 Task 路线图</span></h1><blockquote><p><span>环境：RTX 3060 Laptop 6GB / sm_86 / CUDA 13.4</span>
+<span>工具：cupy（RawKernel 快速试错）+ torch（对比基准）+ nvcc（原生 .cu 文件）</span>
+<span>目标：从 0 到能写优化的 GPU 算子，理解 Tensor/stride/view/内存层次</span></p></blockquote><hr /><h2><a name="阶段总览" class="md-header-anchor"></a><span>阶段总览</span></h2><figure><table><thead><tr><th><span>阶段</span></th><th><span>Task 范围</span></th><th><span>核心主题</span></th></tr></thead><tbody><tr><td><span>0. 环境与 Hello</span></td><td><span>1-5</span></td><td><span>工具链、第一个 kernel、索引、内存拷贝、计时</span></td></tr><tr><td><span>1. 元素级算子</span></td><td><span>6-12</span></td><td><span>elementwise：add/relu/sigmoid，速度对比</span></td></tr><tr><td><span>2. 规约类算子</span></td><td><span>13-18</span></td><td><span>sum/max：shared memory、warp shuffle、atomic</span></td></tr><tr><td><span>3. 访存优化</span></td><td><span>19-25</span></td><td><span>coalesced、tiling、转置、stride/view</span></td></tr><tr><td><span>4. 矩阵乘法</span></td><td><span>26-33</span></td><td><span>naive → tiling → 寄存器分块 → 对比 cuBLAS</span></td></tr><tr><td><span>5. 工程与进阶</span></td><td><span>34-40</span></td><td><span>stream、atomic、softmax、torch 封装、profile、迷你 Tensor</span></td></tr></tbody></table></figure><hr /><h2><a name="阶段-0环境与-hellotask-1-5）" class="md-header-anchor"></a><span>阶段 0：环境与 Hello（Task 1-5）</span></h2><h3><a name="task-1环境自检" class="md-header-anchor"></a><span>Task 1：环境自检</span></h3><ul><li><strong><span>目标</span></strong><span>：确认 torch / cupy / nvcc 三条线都能跑</span></li><li><strong><span>任务</span></strong><span>：写一个脚本分别验证 </span><code>torch.cuda.is_available()</code><span>、</span><code>cupy</code><span> 能 import、</span><code>nvcc --version</code></li><li><strong><span>验收</span></strong><span>：三条全 OK，能打印出 RTX 3060</span></li><li><strong><span>提示</span></strong><span>：cupy 用 </span><code>C:\Users\WK112\miniconda3\envs\cupy\python.exe</code><span> 跑</span></li></ul><h3><a name="task-2第一个-gpu-kernel" class="md-header-anchor"></a><span>Task 2：第一个 GPU Kernel</span></h3><ul><li><strong><span>目标</span></strong><span>：用 cupy RawKernel 跑一个 &quot;hello from GPU&quot;</span></li><li><strong><span>关键 API</span></strong><span>：</span><code>cp.RawKernel</code><span>、</span><code>&lt;&lt;&lt;grid, block&gt;&gt;&gt;</code><span> launch</span></li><li><strong><span>任务</span></strong><span>：写一个 kernel，每个 thread 打印自己的 threadIdx</span></li><li><strong><span>验收</span></strong><span>：看到 256 个线程各自打印</span></li><li><strong><span>坑</span></strong><span>：GPU printf 需要 kernel launch 后同步才能看到</span></li></ul><h3><a name="task-3gridblockthread-索引计算" class="md-header-anchor"></a><span>Task 3：Grid/Block/Thread 索引计算</span></h3><ul><li><strong><span>目标</span></strong><span>：彻底搞懂一维索引公式 </span><code>i = blockIdx.x * blockDim.x + threadIdx.x</code></li><li><strong><span>任务</span></strong><span>：写一个 kernel，输入 N=1,000,000，每个 thread 计算自己的全局下标，写到输出数组</span></li><li><strong><span>验收</span></strong><span>：输出数组正好是 </span><code>[0, 1, 2, ..., N-1]</code></li><li><strong><span>思考</span></strong><span>：grid 大小怎么算？</span><code>(N + block - 1) // block</code><span> 为什么要这么写？</span></li></ul><h3><a name="task-4host-device-内存拷贝" class="md-header-anchor"></a><span>Task 4：Host-Device 内存拷贝</span></h3><ul><li><strong><span>目标</span></strong><span>：理解 </span><code>cudaMalloc / cudaMemcpy</code><span>（cupy 里就是 </span><code>cp.array</code><span> / </span><code>.get()</code><span>）</span></li><li><strong><span>任务</span></strong><span>：用 cupy 把 numpy 数组搬到 GPU，跑一个加 1 的 kernel，再搬回来对比</span></li><li><strong><span>验收</span></strong><span>：结果和 numpy 一致</span></li><li><strong><span>思考</span></strong><span>：拷贝开销占总时间多少？用事件计时测一下</span></li></ul><h3><a name="task-5事件计时与错误检查" class="md-header-anchor"></a><span>Task 5：事件计时与错误检查</span></h3><ul><li><strong><span>目标</span></strong><span>：学会正确测 GPU 时间，学会检查 CUDA 错误</span></li><li><strong><span>任务</span></strong><span>：用 </span><code>cp.cuda.Event()</code><span> 测 Task 2 那个 kernel 的耗时（多次 warmup 后测）</span></li><li><strong><span>验收</span></strong><span>：能打印出 ms 级时间</span></li><li><strong><span>提示</span></strong><span>：不要用 </span><code>time.time()</code><span> 测 GPU，因为 kernel 是异步的</span></li></ul><hr /><h2><a name="阶段-1元素级算子task-6-12）" class="md-header-anchor"></a><span>阶段 1：元素级算子（Task 6-12）</span></h2><h3><a name="task-6vector-add" class="md-header-anchor"></a><span>Task 6：Vector Add</span></h3><ul><li><strong><span>目标</span></strong><span>：经典入门算子，两个数组对应位置相加</span></li><li><strong><span>任务</span></strong><span>：写 </span><code>my_add(a, b, out, n)</code><span> kernel</span></li><li><strong><span>验收</span></strong><span>：和 </span><code>a + b</code><span> 结果一致</span></li><li><strong><span>对比</span></strong><span>：测和 cupy 自带 </span><code>a + b</code><span> 的速度差</span></li></ul><h3><a name="task-7axpy" class="md-header-anchor"></a><span>Task 7：AXPY</span></h3><ul><li><strong><span>目标</span></strong><span>：</span><code>y = a*x + y</code><span>，标量乘加</span></li><li><strong><span>关键</span></strong><span>：理解 device 端怎么传标量参数</span></li><li><strong><span>验收</span></strong><span>：和 </span><code>a*x + y</code><span> 对比一致</span></li></ul><h3><a name="task-8relu" class="md-header-anchor"></a><span>Task 8：ReLU</span></h3><ul><li><strong><span>目标</span></strong><span>：深度学习最常用激活函数</span></li><li><strong><span>任务</span></strong><span>：</span><code>out[i] = max(0, x[i])</code></li><li><strong><span>坑</span></strong><span>：GPU 上没有 </span><code>std::max</code><span>，用 </span><code>fmaxf(0.f, x[i])</code></li></ul><h3><a name="task-9sigmoid" class="md-header-anchor"></a><span>Task 9：Sigmoid</span></h3><ul><li><strong><span>目标</span></strong><span>：</span><code>out = 1 / (1 + exp(-x))</code></li><li><strong><span>关键</span></strong><span>：用 </span><code>__expf</code><span>（快精度）和 </span><code>expf</code><span>（标准精度）对比速度</span></li><li><strong><span>思考</span></strong><span>：为什么快精度版本更快？什么时候不能用？</span></li></ul><h3><a name="task-10一维-copy--scale" class="md-header-anchor"></a><span>Task 10：一维 Copy / Scale</span></h3><ul><li><strong><span>目标</span></strong><span>：</span><code>out = a * x</code><span>，练手标量广播</span></li><li><strong><span>延伸</span></strong><span>：改成 stride 版本，跳过每隔一个元素</span></li></ul><h3><a name="task-11二维-elementwise矩阵加法）" class="md-header-anchor"></a><span>Task 11：二维 Elementwise（矩阵加法）</span></h3><ul><li><strong><span>目标</span></strong><span>：从一维升到二维，练二维索引</span></li><li><strong><span>关键</span></strong><span>：</span><code>row = blockIdx.y * blockDim.y + threadIdx.y</code><span>，</span><code>col = blockIdx.x * blockDim.x + threadIdx.x</code></li><li><strong><span>任务</span></strong><span>：两个 1024×1024 矩阵相加</span></li><li><strong><span>验收</span></strong><span>：和 numpy </span><code>A + B</code><span> 一致</span></li></ul><h3><a name="task-12速度对比表" class="md-header-anchor"></a><span>Task 12：速度对比表</span></h3><ul><li><strong><span>目标</span></strong><span>：把 Task 6-11 的手写 kernel 和 numpy / torch GPU 版本对比</span></li><li><strong><span>任务</span></strong><span>：列一个表格：算子 / 手写耗时 / numpy 耗时 / torch GPU 耗时 / 加速比</span></li><li><strong><span>思考</span></strong><span>：为什么手写的比 torch 慢？差在哪？</span></li></ul><hr /><h2><a name="阶段-2规约类算子task-13-18）" class="md-header-anchor"></a><span>阶段 2：规约类算子（Task 13-18）</span></h2><h3><a name="task-13naive-sum全局内存）" class="md-header-anchor"></a><span>Task 13：Naive Sum（全局内存）</span></h3><ul><li><strong><span>目标</span></strong><span>：每个 block 算部分和，写回全局内存，CPU 再 reduce</span></li><li><strong><span>坑</span></strong><span>：这种写法性能极差，理解为什么</span></li><li><strong><span>任务</span></strong><span>：对 N=1M 数组求和</span></li></ul><h3><a name="task-14shared-memory-并行规约基础版）" class="md-header-anchor"></a><span>Task 14：Shared Memory 并行规约（基础版）</span></h3><ul><li><strong><span>目标</span></strong><span>：用 </span><code>__shared__</code><span> 在 block 内并行规约</span></li><li><strong><span>关键 API</span></strong><span>：</span><code>__shared__ float sdata[256];</code><span>、</span><code>__syncthreads()</code></li><li><strong><span>算法</span></strong><span>：相邻两个元素相加，log2(N) 步</span></li><li><strong><span>坑</span></strong><span>：线程分叉（warp divergence）</span></li></ul><h3><a name="task-15树状规约优化" class="md-header-anchor"></a><span>Task 15：树状规约优化</span></h3><ul><li><strong><span>目标</span></strong><span>：把 Task 14 的索引改成 </span><code>sdata[2*tid] + sdata[2*tid+1]</code><span>，减少 warp divergence</span></li><li><strong><span>对比</span></strong><span>：和 Task 14 的速度差</span></li></ul><h3><a name="task-16warp-shuffle-规约" class="md-header-anchor"></a><span>Task 16：Warp Shuffle 规约</span></h3><ul><li><strong><span>目标</span></strong><span>：用 </span><code>__shfl_down_sync</code><span> 在 warp 内规约，不用 shared memory</span></li><li><strong><span>关键 API</span></strong><span>：</span><code>__shfl_down_sync(0xffffffff, val, offset)</code></li><li><strong><span>思考</span></strong><span>：warp shuffle 比 shared memory 快多少？</span></li></ul><h3><a name="task-17多-block-规约--atomic" class="md-header-anchor"></a><span>Task 17：多 Block 规约 + Atomic</span></h3><ul><li><strong><span>目标</span></strong><span>：跨 block 求和，用 </span><code>atomicAdd</code><span> 累加到全局变量</span></li><li><strong><span>关键 API</span></strong><span>：</span><code>atomicAdd(&amp;global_sum, partial_sum)</code></li><li><strong><span>坑</span></strong><span>：atomic 是串行的，为什么还要用？</span></li><li><strong><span>优化</span></strong><span>：先 per-block reduce 再 atomic，减少 atomic 次数</span></li></ul><h3><a name="task-18max--min-规约" class="md-header-anchor"></a><span>Task 18：Max / Min 规约</span></h3><ul><li><strong><span>目标</span></strong><span>：把 sum 规约改成 max 规约</span></li><li><strong><span>延伸</span></strong><span>：argmax（返回最大值的下标）</span></li></ul><hr /><h2><a name="阶段-3访存优化task-19-25）" class="md-header-anchor"></a><span>阶段 3：访存优化（Task 19-25）</span></h2><h3><a name="task-19coalesced-vs-uncoalesced" class="md-header-anchor"></a><span>Task 19：Coalesced vs Uncoalesced</span></h3><ul><li><p><strong><span>目标</span></strong><span>：直观看到访存模式对性能的影响</span></p></li><li><p><strong><span>任务</span></strong><span>：写两个 kernel：</span></p><ul><li><span>coalesced：thread i 访问 </span><code>a[i]</code><span>（连续）</span></li><li><span>uncoalesced：thread i 访问 </span><code>a[i*1024]</code><span>（跨步）</span></li></ul></li><li><p><strong><span>对比</span></strong><span>：速度差多少倍？</span></p></li></ul><h3><a name="task-20shared-memory-tiling-概念" class="md-header-anchor"></a><span>Task 20：Shared Memory Tiling 概念</span></h3><ul><li><strong><span>目标</span></strong><span>：理解为什么需要 tiling——把全局内存数据分块加载到 shared memory</span></li><li><strong><span>概念</span></strong><span>：shared memory 快但小（每个 block 几 KB），全局内存慢但大</span></li></ul><h3><a name="task-21矩阵转置-naive" class="md-header-anchor"></a><span>Task 21：矩阵转置 Naive</span></h3><ul><li><strong><span>目标</span></strong><span>：写一个 naive 的矩阵转置 kernel</span></li><li><strong><span>坑</span></strong><span>：写的时候是 coalesced，读的时候不 coalesced（或者反过来）</span></li></ul><h3><a name="task-22矩阵转置-tiled" class="md-header-anchor"></a><span>Task 22：矩阵转置 Tiled</span></h3><ul><li><strong><span>目标</span></strong><span>：用 shared memory tiling 优化转置</span></li><li><strong><span>关键</span></strong><span>：block 加载一个 tile 到 shared memory，再写回转置位置</span></li><li><strong><span>对比</span></strong><span>：和 Task 21 的速度差</span></li><li><strong><span>延伸</span></strong><span>：怎么避免 shared memory bank conflict？</span></li></ul><h3><a name="task-23stride-寻址" class="md-header-anchor"></a><span>Task 23：Stride 寻址</span></h3><ul><li><strong><span>目标</span></strong><span>：在 GPU kernel 里按 stride 访问数据（非连续 tensor）</span></li><li><strong><span>任务</span></strong><span>：输入一个 shape=[4, 1024, 1024] 的 tensor，stride 不是连续的，写 kernel 按 stride 寻址</span></li><li><strong><span>关联</span></strong><span>：这就是你之前问的 Tensor stride 概念在 GPU 上的体现</span></li></ul><h3><a name="task-24view-零拷贝验证" class="md-header-anchor"></a><span>Task 24：View 零拷贝验证</span></h3><ul><li><strong><span>目标</span></strong><span>：验证 GPU 上的 view 也是零拷贝</span></li><li><strong><span>任务</span></strong><span>：用 torch 创建一个 tensor，做 </span><code>.t()</code><span> / </span><code>.view()</code><span>，检查 </span><code>.data_ptr()</code><span> 是否变了</span></li><li><strong><span>思考</span></strong><span>：GPU view 为什么不需要写 kernel？它只是改了元信息</span></li></ul><h3><a name="task-25cache-行为观察" class="md-header-anchor"></a><span>Task 25：Cache 行为观察</span></h3><ul><li><strong><span>目标</span></strong><span>：观察 L1/L2 cache 对访问模式的影响</span></li><li><strong><span>任务</span></strong><span>：同一个数组，分别顺序访问 vs 随机访问，测时间</span></li><li><strong><span>工具</span></strong><span>：torch 的 </span><code>torch.cuda.Event</code><span> 计时</span></li></ul><hr /><h2><a name="阶段-4矩阵乘法task-26-33）" class="md-header-anchor"></a><span>阶段 4：矩阵乘法（Task 26-33）</span></h2><h3><a name="task-26naive-matmul" class="md-header-anchor"></a><span>Task 26：Naive Matmul</span></h3><ul><li><strong><span>目标</span></strong><span>：每个 thread 算 C 的一个元素 </span><code>C[i][j] = sum_k A[i][k]*B[k][j]</code></li><li><strong><span>性能</span></strong><span>：预期很慢，理解为什么</span></li><li><strong><span>坑</span></strong><span>：B 矩阵访问是跳跃的，不 coalesced</span></li></ul><h3><a name="task-27转置-b-优化访存" class="md-header-anchor"></a><span>Task 27：转置 B 优化访存</span></h3><ul><li><strong><span>目标</span></strong><span>：先把 B 转置成 B^T，这样访问 B^T</span>[<span>k</span>][j]<span> 就是连续的</span></li><li><strong><span>对比</span></strong><span>：和 Task 26 的速度差</span></li></ul><h3><a name="task-28shared-memory-tiling-matmul基础版）" class="md-header-anchor"></a><span>Task 28：Shared Memory Tiling Matmul（基础版）</span></h3><ul><li><strong><span>目标</span></strong><span>：经典 CUDA 课程作业</span></li><li><strong><span>算法</span></strong><span>：每个 block 算一个 C 的 tile（比如 32×32），循环加载 A 和 B 的 tile 到 shared memory</span></li><li><strong><span>关键</span></strong><span>：</span><code>__shared__ float As[32][32], Bs[32][32];</code></li><li><strong><span>对比</span></strong><span>：和 Task 27 的速度差</span></li></ul><h3><a name="task-29寄存器分块" class="md-header-anchor"></a><span>Task 29：寄存器分块</span></h3><ul><li><strong><span>目标</span></strong><span>：每个 thread 算 4×4 个输出元素，而不是 1 个</span></li><li><strong><span>好处</span></strong><span>：减少 shared memory 访问次数，增加算术密度</span></li><li><strong><span>对比</span></strong><span>：和 Task 28 的速度差</span></li></ul><h3><a name="task-30对比-cublas" class="md-header-anchor"></a><span>Task 30：对比 cuBLAS</span></h3><ul><li><strong><span>目标</span></strong><span>：测 </span><code>torch.matmul(A, B)</code><span> 的速度，和你手写的对比</span></li><li><strong><span>思考</span></strong><span>：cuBLAS 比你快多少倍？为什么？</span></li><li><strong><span>现实</span></strong><span>：手写能跑到 cuBLAS 的 50% 就已经不错了</span></li></ul><h3><a name="task-31不同形状的性能" class="md-header-anchor"></a><span>Task 31：不同形状的性能</span></h3><ul><li><strong><span>目标</span></strong><span>：测 M=N=K=512 / 1024 / 2048 / 4096 时的性能</span></li><li><strong><span>任务</span></strong><span>：画一个表格：尺寸 / 你的 kernel GFLOPS / cuBLAS GFLOPS</span></li><li><strong><span>思考</span></strong><span>：为什么大矩阵相对性能更好？</span></li></ul><h3><a name="task-32占用率分析" class="md-header-anchor"></a><span>Task 32：占用率分析</span></h3><ul><li><strong><span>目标</span></strong><span>：理解 occupancy（一个 SM 上能同时跑多少 warp）</span></li><li><strong><span>概念</span></strong><span>：block 大小、shared memory 用量、register 用量怎么影响 occupancy</span></li><li><strong><span>工具</span></strong><span>：</span><code>nvcc</code><span> 的 </span><code>--ptxas-options=-v</code><span> 看 register 用量</span></li></ul><h3><a name="task-33roofline-模型" class="md-header-anchor"></a><span>Task 33：Roofline 模型</span></h3><ul><li><strong><span>目标</span></strong><span>：理解你的 kernel 是 compute-bound 还是 memory-bound</span></li><li><strong><span>公式</span></strong><span>：算术强度 = 计算量 / 访存量</span></li><li><strong><span>思考</span></strong><span>：matmul 是 compute-bound，reduction 是 memory-bound，为什么？</span></li></ul><hr /><h2><a name="阶段-5工程与进阶task-34-40）" class="md-header-anchor"></a><span>阶段 5：工程与进阶（Task 34-40）</span></h2><h3><a name="task-34multi-stream-并行" class="md-header-anchor"></a><span>Task 34：Multi-Stream 并行</span></h3><ul><li><strong><span>目标</span></strong><span>：用多个 CUDA stream 重叠计算和拷贝</span></li><li><strong><span>关键 API</span></strong><span>：</span><code>cp.cuda.Stream()</code></li><li><strong><span>场景</span></strong><span>：处理多个小 batch，用 stream 重叠</span></li></ul><h3><a name="task-35atomic-histogram" class="md-header-anchor"></a><span>Task 35：Atomic Histogram</span></h3><ul><li><strong><span>目标</span></strong><span>：用 </span><code>atomicAdd</code><span> 实现 histogram</span></li><li><strong><span>任务</span></strong><span>：对一个 1M 数组，统计每个值出现的次数（量化到 256 个 bin）</span></li><li><strong><span>坑</span></strong><span>：atomic 冲突怎么优化？（per-block local histogram 再合并）</span></li></ul><h3><a name="task-36softmax-kernel" class="md-header-anchor"></a><span>Task 36：Softmax Kernel</span></h3><ul><li><strong><span>目标</span></strong><span>：深度学习常用算子</span></li><li><strong><span>算法</span></strong><span>：两步规约——先找 max，再算 sum(exp(x-max))，最后归一化</span></li><li><strong><span>挑战</span></strong><span>：怎么避免数值不稳定？为什么要先减 max？</span></li></ul><h3><a name="task-37layer-norm-kernel" class="md-header-anchor"></a><span>Task 37：Layer Norm Kernel</span></h3><ul><li><strong><span>目标</span></strong><span>：对每一行做归一化</span></li><li><strong><span>关联</span></strong><span>：和 softmax 的规约步骤很像</span></li></ul><h3><a name="task-38torch-c-extension-封装" class="md-header-anchor"></a><span>Task 38：torch C++ Extension 封装</span></h3><ul><li><strong><span>目标</span></strong><span>：把你写的某个 kernel（比如 add 或 matmul）用 </span><code>torch.utils.cpp_extension.load</code><span> 封装</span></li><li><strong><span>效果</span></strong><span>：Python 里直接 </span><code>torch.my_add(a, b)</code><span> 调用</span></li><li><strong><span>意义</span></strong><span>：这就是工业界自定义算子的标准流程</span></li></ul><h3><a name="task-39profile-工具入门" class="md-header-anchor"></a><span>Task 39：Profile 工具入门</span></h3><ul><li><strong><span>目标</span></strong><span>：用 </span><code>nsys</code><span> 或 </span><code>ncu</code><span> 看你的 kernel 瓶颈在哪</span></li><li><strong><span>任务</span></strong><span>：对 Task 28 的 tiling matmul 跑一次 ncu，看 memory throughput / compute throughput</span></li><li><strong><span>思考</span></strong><span>：你的瓶颈是访存还是计算？</span></li></ul><h3><a name="task-40迷你-tensor-类" class="md-header-anchor"></a><span>Task 40：迷你 Tensor 类</span></h3><ul><li><p><strong><span>目标</span></strong><span>：综合所有知识，写一个极简 Tensor 类</span></p></li><li><p><strong><span>功能</span></strong><span>：</span></p><ul><li><span>GPU storage（</span><code>float* data</code><span>）</span></li><li><span>shape + stride + offset</span></li><li><span>view() 零拷贝（只改 shape/stride）</span></li><li><span>调用你写的 add / matmul kernel</span></li></ul></li><li><p><strong><span>意义</span></strong><span>：把前面 39 个 task 的知识点串起来——这就是你最开始问的 &quot;Tensor 如何管理内存 / shape&amp;stride / view 零拷贝&quot; 的工程实现</span></p></li></ul><hr /><h2><a name="推荐执行顺序与节奏" class="md-header-anchor"></a><span>推荐执行顺序与节奏</span></h2><figure><table><thead><tr><th><span>周</span></th><th><span>Task</span></th><th><span>重点</span></th></tr></thead><tbody><tr><td><span>第 1 周</span></td><td><span>1-12</span></td><td><span>熟悉 cupy RawKernel，写 elementwise 算子</span></td></tr><tr><td><span>第 2 周</span></td><td><span>13-18</span></td><td><span>规约算法，理解 shared memory 和 warp</span></td></tr><tr><td><span>第 3 周</span></td><td><span>19-25</span></td><td><span>访存优化，coalesced / tiling / stride</span></td></tr><tr><td><span>第 4 周</span></td><td><span>26-33</span></td><td><span>matmul 优化，对比 cuBLAS</span></td></tr><tr><td><span>第 5 周</span></td><td><span>34-40</span></td><td><span>工程化，softmax / torch 封装 / profile / 迷你 Tensor</span></td></tr></tbody></table></figure><h2><a name="关键原则" class="md-header-anchor"></a><span>关键原则</span></h2><ol start='' ><li><strong><span>先用 cupy RawKernel 快速试错</span></strong><span>，跑通了再考虑要不要用 nvcc 写 .cu 文件</span></li><li><strong><span>每个 kernel 写完都要和 torch GPU 版本对比速度</span></strong><span>，不要闭门造车</span></li><li><strong><span>遇到性能问题，先怀疑访存模式</span></strong><span>，再怀疑计算</span></li><li><strong><span>手写 kernel 永远比不过 cuBLAS/cuDNN</span></strong><span>，学习目的是理解原理，不是替代框架</span></li><li><strong><span>6GB 显存够用了</span></strong><span>，矩阵别超过 4096×4096（float32 一个矩阵 64MB）</span></li></ol></div>
+</body>
+</html>
