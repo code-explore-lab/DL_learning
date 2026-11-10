@@ -8,12 +8,13 @@ kernel_basic = r"""
 extern "C"
 __global__ void sum_shared_basic(const float* x, float* partial, int n)
 {
+## Block内共享内存
     __shared__ float sdata[256];
 
     int tid = threadIdx.x;
-    int i = blockIdx.x * blockDim.x + tid;
+    int i = blockIdx.x * blockDim.x + tid; //全局索引
     sdata[tid] = (i < n) ? x[i] : 0.f;
-    __syncthreads();
+    __syncthreads(); //block内线程屏障同步
 
     // log2(BLOCK)=8 步，相邻两个元素相加
     for (int s = 1; s < blockDim.x; s <<= 1) {

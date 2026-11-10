@@ -15,6 +15,8 @@ __global__ void sum_naive(const float* x, float* partial, int n)
     for (; i < n; i += stride) {
         s += x[i];
     }
+    //`partial[blockIdx.x]` 是这个 block 对应的全局内存位置；
+    //  **同一个 block 里面所有 256 个线程，都往同一个全局地址做原子加**。
     atomicAdd(&partial[blockIdx.x], s);   // 直接打全局内存，既没有 shared 也没有 warp shuffle
 }
 """

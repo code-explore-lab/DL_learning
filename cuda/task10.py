@@ -25,7 +25,7 @@ __global__ void scale_stride_kernel(float a, const float* x, float* out, int n, 
     }
 }
 """
-
+# 包装成一个cupy可调用对象
 scale_kernel = cp.RawKernel(kernel_code, "scale_kernel")
 scale_stride_kernel = cp.RawKernel(kernel_stride_code, "scale_stride_kernel")
 
